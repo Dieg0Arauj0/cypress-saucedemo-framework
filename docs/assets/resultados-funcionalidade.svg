@@ -1,0 +1,118 @@
+
+<svg xmlns="http://www.w3.org/2000/svg"
+     width="760" height="505"
+     viewBox="0 0 760 505">
+  <rect width="760" height="505" rx="16" fill="#101827"/>
+
+  <text x="40" y="48" fill="#f1f5f9"
+        font-family="Arial, sans-serif" font-size="22" font-weight="700">
+    Resultados por funcionalidade
+  </text>
+
+  <text x="40" y="76" fill="#94a3b8"
+        font-family="Arial, sans-serif" font-size="13">
+    Testes aprovados em relação ao total por suíte
+  </text>
+
+  
+      <text x="40" y="125" fill="#f1f5f9"
+            font-family="Arial, sans-serif" font-size="16">
+        Cart
+      </text>
+
+      <text x="720" y="125" text-anchor="end"
+            fill="#94a3b8" font-family="Arial, sans-serif"
+            font-size="14">
+        7/7 · 100,0%
+      </text>
+
+      <rect x="40" y="141" width="660" height="15"
+            rx="7" fill="#344256"/>
+
+      <rect x="40" y="141" width="660" height="15"
+            fill="#34c77b"/>
+
+      <rect x="700" y="141"
+            width="0" height="15"
+            fill="#e5a83b"/>
+
+      <rect x="700" y="141"
+            width="0" height="15"
+            fill="#f06a77"/>
+    
+      <text x="40" y="220" fill="#f1f5f9"
+            font-family="Arial, sans-serif" font-size="16">
+        Checkout
+      </text>
+
+      <text x="720" y="220" text-anchor="end"
+            fill="#94a3b8" font-family="Arial, sans-serif"
+            font-size="14">
+        8/9 · 88,9%
+      </text>
+
+      <rect x="40" y="236" width="660" height="15"
+            rx="7" fill="#344256"/>
+
+      <rect x="40" y="236" width="586.6666666666666" height="15"
+            fill="#34c77b"/>
+
+      <rect x="626.6666666666666" y="236"
+            width="73.33333333333333" height="15"
+            fill="#e5a83b"/>
+
+      <rect x="700" y="236"
+            width="0" height="15"
+            fill="#f06a77"/>
+    
+      <text x="40" y="315" fill="#f1f5f9"
+            font-family="Arial, sans-serif" font-size="16">
+        Compra
+      </text>
+
+      <text x="720" y="315" text-anchor="end"
+            fill="#94a3b8" font-family="Arial, sans-serif"
+            font-size="14">
+        9/9 · 100,0%
+      </text>
+
+      <rect x="40" y="331" width="660" height="15"
+            rx="7" fill="#344256"/>
+
+      <rect x="40" y="331" width="660" height="15"
+            fill="#34c77b"/>
+
+      <rect x="700" y="331"
+            width="0" height="15"
+            fill="#e5a83b"/>
+
+      <rect x="700" y="331"
+            width="0" height="15"
+            fill="#f06a77"/>
+    
+      <text x="40" y="410" fill="#f1f5f9"
+            font-family="Arial, sans-serif" font-size="16">
+        Autenticação de Usuário (Login)
+      </text>
+
+      <text x="720" y="410" text-anchor="end"
+            fill="#94a3b8" font-family="Arial, sans-serif"
+            font-size="14">
+        13/13 · 100,0%
+      </text>
+
+      <rect x="40" y="426" width="660" height="15"
+            rx="7" fill="#344256"/>
+
+      <rect x="40" y="426" width="660" height="15"
+            fill="#34c77b"/>
+
+      <rect x="700" y="426"
+            width="0" height="15"
+            fill="#e5a83b"/>
+
+      <rect x="700" y="426"
+            width="0" height="15"
+            fill="#f06a77"/>
+    
+</svg>

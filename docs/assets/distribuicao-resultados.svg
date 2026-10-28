@@ -1,0 +1,65 @@
+
+<svg xmlns="http://www.w3.org/2000/svg"
+     width="760" height="350" viewBox="0 0 760 350">
+  <rect width="760" height="350" rx="16" fill="#101827"/>
+
+  <text x="36" y="48" fill="#f1f5f9"
+        font-family="Arial, sans-serif" font-size="22" font-weight="700">
+    Distribuição dos resultados
+  </text>
+
+  <circle cx="195" cy="205" r="94"
+          fill="none" stroke="#344256" stroke-width="27"/>
+
+  <circle cx="195" cy="205" r="94"
+          fill="none" stroke="#34c77b" stroke-width="27"
+          stroke-dasharray="575.0768025887 590.6194188748811"
+          transform="rotate(-90 195 205)"/>
+
+  <circle cx="195" cy="205" r="94"
+          fill="none" stroke="#e5a83b" stroke-width="27"
+          stroke-dasharray="15.542616286181081 590.6194188748811"
+          stroke-dashoffset="-575.0768025887"
+          transform="rotate(-90 195 205)"/>
+
+  <text x="195" y="203" text-anchor="middle"
+        fill="#f1f5f9" font-family="Arial, sans-serif"
+        font-size="34" font-weight="700">97,37%</text>
+
+  <text x="195" y="228" text-anchor="middle"
+        fill="#94a3b8" font-family="Arial, sans-serif"
+        font-size="14">aprovação</text>
+
+  
+    <rect x="388" y="134" width="13" height="13"
+          rx="3" fill="#34c77b"/>
+    <text x="417" y="145" fill="#f1f5f9"
+          font-family="Arial, sans-serif" font-size="17">Aprovados</text>
+    <text x="691" y="145" text-anchor="end"
+          fill="#f1f5f9" font-family="Arial, sans-serif"
+          font-size="20" font-weight="700">37</text>
+  
+    <rect x="388" y="189" width="13" height="13"
+          rx="3" fill="#e5a83b"/>
+    <text x="417" y="200" fill="#f1f5f9"
+          font-family="Arial, sans-serif" font-size="17">Pendentes</text>
+    <text x="691" y="200" text-anchor="end"
+          fill="#f1f5f9" font-family="Arial, sans-serif"
+          font-size="20" font-weight="700">1</text>
+  
+    <rect x="388" y="244" width="13" height="13"
+          rx="3" fill="#f06a77"/>
+    <text x="417" y="255" fill="#f1f5f9"
+          font-family="Arial, sans-serif" font-size="17">Falhas</text>
+    <text x="691" y="255" text-anchor="end"
+          fill="#f1f5f9" font-family="Arial, sans-serif"
+          font-size="20" font-weight="700">0</text>
+  
+
+  <line x1="360" y1="292" x2="724" y2="292" stroke="#344256"/>
+  <text x="388" y="320" fill="#94a3b8"
+        font-family="Arial, sans-serif" font-size="13">Total de testes</text>
+  <text x="691" y="320" text-anchor="end" fill="#f1f5f9"
+        font-family="Arial, sans-serif" font-size="18"
+        font-weight="700">38</text>
+</svg>

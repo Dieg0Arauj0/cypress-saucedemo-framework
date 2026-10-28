@@ -1,0 +1,19 @@
+# 📦 Dependências do Node (Nunca subir para o GitHub)
+node_modules/
+
+# 🔒 Variáveis de Ambiente (Senhas e Tokens reais)
+.env
+
+# 📊 Relatórios e Evidências Visuais do Cypress
+cypress/reports/
+cypress/screenshots/
+cypress/videos/
+cypress/downloads/
+
+# 🛑 Logs de erro
+npm-debug.log*
+yarn-error.log*
+
+# 💻 Arquivos temporários do Sistema Operacional
+.DS_Store
+Thumbs.db

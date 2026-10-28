@@ -1,0 +1,16 @@
+
+{
+  "name": "cypress-saucedemo-framework",
+  "version": "1.0.0",
+  "description": "Projeto de automação de testes E2E do SauceDemo utilizando Cypress e JavaScript.",
+  "private": true,
+  "scripts": {
+  "test": "node scripts/executar-testes.js",
+  "test:open": "cypress open",
+  "report:qa": "node scripts/gerar-graficos.js"
+},
+  "devDependencies": {
+    "cypress": "^16.2.0",
+    "cypress-mochawesome-reporter": "^5.0.0"
+  }
+}

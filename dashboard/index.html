@@ -1,0 +1,347 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>QA Dashboard | SauceDemo</title>
+  <style>
+    :root {
+      font-family: Inter, Arial, sans-serif;
+      color: #e5e7eb;
+      background: #0b1120;
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      max-width: 1150px;
+      margin: 0 auto;
+      padding: 40px 24px;
+    }
+
+    header {
+      margin-bottom: 32px;
+    }
+
+    h1 {
+      margin: 0 0 8px;
+      font-size: 30px;
+    }
+
+    h2 {
+      font-size: 18px;
+      margin-top: 0;
+    }
+
+    .muted {
+      color: #94a3b8;
+    }
+
+    .cards {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 16px;
+      margin-bottom: 24px;
+    }
+
+    .card,
+    .panel {
+      background: #151f32;
+      border: 1px solid #29364d;
+      border-radius: 16px;
+      padding: 24px;
+    }
+
+    .number {
+      display: block;
+      font-size: 34px;
+      font-weight: 700;
+      margin-bottom: 8px;
+    }
+
+    .green {
+      color: #4ade80;
+    }
+
+    .yellow {
+      color: #fbbf24;
+    }
+
+    .red {
+      color: #fb7185;
+    }
+
+    .content {
+      display: grid;
+      grid-template-columns: 1fr 1.4fr;
+      gap: 24px;
+    }
+
+    .donut {
+      width: 210px;
+      height: 210px;
+      border-radius: 50%;
+      margin: 24px auto;
+      display: grid;
+      place-items: center;
+      position: relative;
+    }
+
+    .donut::after {
+      content: "";
+      position: absolute;
+      inset: 27px;
+      border-radius: 50%;
+      background: #151f32;
+    }
+
+    .donut-label {
+      z-index: 1;
+      text-align: center;
+      font-size: 30px;
+      font-weight: 700;
+    }
+
+    .donut-label small {
+      display: block;
+      font-size: 12px;
+      color: #94a3b8;
+    }
+
+    .suite {
+      margin: 24px 0;
+    }
+
+    .suite-info {
+      display: flex;
+      justify-content: space-between;
+      margin-bottom: 9px;
+      gap: 12px;
+    }
+
+    .track {
+      height: 12px;
+      border-radius: 20px;
+      overflow: hidden;
+      display: flex;
+      background: #334155;
+    }
+
+    .passed {
+      background: #22c55e;
+    }
+
+    .pending {
+      background: #f59e0b;
+    }
+
+    .failed {
+      background: #f43f5e;
+    }
+
+    .legend {
+      text-align: center;
+      color: #94a3b8;
+      font-size: 13px;
+    }
+
+    #status {
+      margin-bottom: 20px;
+    }
+
+    .report-link {
+      display: inline-block;
+      margin: 12px 0 24px;
+      padding: 12px 18px;
+      background: #2563eb;
+      color: #ffffff;
+      text-decoration: none;
+      border-radius: 10px;
+      font-size: 14px;
+      font-weight: 600;
+      transition: background 0.2s ease;
+    }
+
+    .report-link:hover {
+      background: #1d4ed8;
+    }
+
+    .report-link:focus-visible {
+      outline: 2px solid #93c5fd;
+      outline-offset: 3px;
+    }
+
+    @media (max-width: 750px) {
+      .cards {
+        grid-template-columns: repeat(2, 1fr);
+      }
+
+      .content {
+        grid-template-columns: 1fr;
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <header>
+    <h1>QA Dashboard | SauceDemo</h1>
+    <p class="muted">Resultados automatizados com Cypress e Mochawesome</p>
+  </header>
+
+  <p id="status" class="muted">Carregando resultados...</p>
+  <p id="execution-date" class="muted"></p>
+  <a href="../cypress/reports/html/index.html" target="_blank" rel="noopener noreferrer" class="report-link">
+    Ver relatório técnico completo ↗
+  </a>
+
+  <section class="cards">
+    <div class="card">
+      <span id="total" class="number">—</span>
+      <span class="muted">Total de testes</span>
+    </div>
+    <div class="card">
+      <span id="passes" class="number green">—</span>
+      <span class="muted">Aprovados</span>
+    </div>
+    <div class="card">
+      <span id="failures" class="number red">—</span>
+      <span class="muted">Falhas</span>
+    </div>
+    <div class="card">
+      <span id="pending" class="number yellow">—</span>
+      <span class="muted">Pendentes</span>
+    </div>
+  </section>
+
+  <section class="content">
+    <div class="panel">
+      <h2>Distribuição dos resultados</h2>
+      <div id="donut" class="donut">
+        <div class="donut-label">
+          <span id="percentage">—</span>
+          <small>Aprovação</small>
+        </div>
+      </div>
+      <p id="duration" class="legend"></p>
+    </div>
+
+    <div class="panel">
+      <h2>Resultados por suíte</h2>
+      <div id="suites"></div>
+    </div>
+  </section>
+
+  <script>
+    const $ = id => document.getElementById(id);
+
+    const count = (tests, predicate) =>
+      tests.filter(predicate).length;
+
+    async function loadDashboard() {
+      try {
+        const response = await fetch(
+          '../cypress/reports/html/index.json',
+          { cache: 'no-store' }
+        );
+
+        if (!response.ok) {
+          throw new Error(`HTTP ${response.status}`);
+        }
+
+        const data = await response.json();
+        const stats = data.stats;
+        const executionDate = new Date(stats.start);
+
+        $('execution-date').textContent =
+          `Última execução: ${executionDate.toLocaleString('pt-BR', {
+            dateStyle: 'long',
+            timeStyle: 'short',
+            timeZone: 'America/Sao_Paulo'
+          })}`;
+
+        $('total').textContent = stats.tests;
+        $('passes').textContent = stats.passes;
+        $('failures').textContent = stats.failures;
+        $('pending').textContent = stats.pending;
+
+        const percent = stats.tests
+          ? (stats.passes / stats.tests) * 100
+          : 0;
+
+        $('percentage').textContent =
+          percent.toFixed(1).replace('.', ',') + '%';
+
+        const passAngle = (stats.passes / (stats.tests || 1)) * 360;
+        const pendingAngle =
+          ((stats.passes + stats.pending) / (stats.tests || 1)) * 360;
+
+        $('donut').style.background = `conic-gradient(
+          #22c55e 0deg ${passAngle}deg,
+          #f59e0b ${passAngle}deg ${pendingAngle}deg,
+          #f43f5e ${pendingAngle}deg 360deg
+        )`;
+
+        $('duration').textContent =
+          `Duração: ${(stats.duration / 1000).toFixed(1)}s`;
+
+        $('suites').replaceChildren();
+
+        for (const result of data.results) {
+          for (const suite of result.suites || []) {
+            const tests = suite.tests || [];
+            const total = tests.length;
+            const passed = count(tests, t => t.state === 'passed');
+            const failed = count(tests, t => t.state === 'failed');
+            const pending = count(tests, t => t.pending === true);
+
+            const section = document.createElement('div');
+            section.className = 'suite';
+
+            const info = document.createElement('div');
+            info.className = 'suite-info';
+
+            const title = document.createElement('strong');
+            title.textContent = suite.title;
+
+            const summary = document.createElement('span');
+            summary.textContent = `${passed}/${total} aprovados`;
+
+            info.append(title, summary);
+
+            const track = document.createElement('div');
+            track.className = 'track';
+
+            for (const [value, className] of [
+              [passed, 'passed'],
+              [pending, 'pending'],
+              [failed, 'failed']
+            ]) {
+              const bar = document.createElement('div');
+              bar.className = className;
+              bar.style.width = `${total ? value / total * 100 : 0}%`;
+              track.appendChild(bar);
+            }
+
+            section.append(info, track);
+            $('suites').appendChild(section);
+          }
+        }
+
+        $('status').textContent =
+          'Dados carregados do último relatório Mochawesome.';
+      } catch (error) {
+        $('status').textContent =
+          'Não foi possível carregar o JSON. Abra o dashboard por um servidor local.';
+        console.error(error);
+      }
+    }
+
+    loadDashboard();
+  </script>
+</body>
+
+</html>
